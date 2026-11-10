@@ -24,4 +24,14 @@
   --gap-col: clamp(32px, 6.45vw, 88px);
   /* gutter, but content stays inside --max on wide screens; % resolves where it's used */
   --pad-x: max(var(--gutter), calc((100% - var(--max)) / 2 + var(--gutter)));
+
+  /* fixed nav: vertical padding at page top and once scrolled */
+  --nav-pad: 40px;
+  --nav-pad-compact: 18px;
+}
+@media (max-width: 720px) {
+  :root {
+    --nav-pad: 24px;
+    --nav-pad-compact: 14px;
+  }
 }

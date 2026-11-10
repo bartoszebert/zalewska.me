@@ -60,17 +60,44 @@ import { hero, nav } from '../../content/site';
     background: linear-gradient(180deg, rgba(14, 14, 14, 0.92) 0%, rgba(14, 14, 14, 0) 100%);
   }
   .nav {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 10;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
     gap: 14px 20px;
-    padding: 40px var(--pad-x);
+    padding: var(--nav-pad) var(--pad-x);
+    line-height: 1;
+    border-bottom: 1px solid transparent;
+  }
+  /* transparent over the hero as designed, compact solid bar once scrolled */
+  @supports (animation-timeline: scroll()) {
+    .nav {
+      /* longhands on purpose: the minifier folds a shorthand + timeline into an invalid shorthand */
+      animation-name: nav-compact;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root);
+      animation-range: 0 160px;
+    }
+  }
+  @supports not (animation-timeline: scroll()) {
+    .nav {
+      padding-block: var(--nav-pad-compact);
+      background: var(--ink);
+      border-bottom-color: var(--dark-rule);
+    }
+  }
+  @keyframes nav-compact {
+    to {
+      padding-block: var(--nav-pad-compact);
+      background: var(--ink);
+      border-bottom-color: var(--dark-rule);
+    }
   }
   .nav a:hover { color: var(--white); }
   .logo { font-weight: 700; color: var(--white); }
@@ -133,8 +160,9 @@ import { hero, nav } from '../../content/site';
     }
   }
   @media (max-width: 720px) {
-    .nav { padding-top: 24px; padding-bottom: 24px; }
-    .links { gap: 20px; }
+    /* fits logo + 3 links on one row from 360px up */
+    .nav { column-gap: 14px; letter-spacing: 0.14em; }
+    .links { gap: 14px; }
     .note { font-size: 17px; }
   }
 </style>

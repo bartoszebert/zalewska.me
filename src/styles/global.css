@@ -2,6 +2,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* anchors land just below the compact fixed nav (1-line text + padding + border) */
+  scroll-padding-top: calc(13px + 2 * var(--nav-pad-compact) + 1px);
   -webkit-text-size-adjust: 100%;
 }
 @media (prefers-reduced-motion: reduce) {
