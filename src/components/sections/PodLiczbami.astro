@@ -1,0 +1,100 @@
+---
+import Section from '../Section.astro';
+import { podLiczbami as s } from '../../content/site';
+---
+<Section id="pod-liczbami" tone="dark" tall class="pod-liczbami">
+  <div class="top">
+    <h2 id="pod-liczbami-title" class="eyebrow" set:html={s.eyebrow} />
+    <p class="eyebrow" set:html={s.source} />
+  </div>
+  <ul class="stats">
+    {s.stats.map((stat) => (
+      <li>
+        <p class="value" set:html={stat.value} />
+        <p class="stat-text" set:html={stat.text} />
+      </li>
+    ))}
+  </ul>
+  <div class="punch">
+    <p class="punch-line" set:html={s.punch} />
+    <p class="text muted" set:html={s.punchNote} />
+  </div>
+  <div class="project">
+    <p class="project-name">{s.project}</p>
+    <p class="text" set:html={s.projectText} />
+    <a href="#kontakt" class="eyebrow cta" set:html={s.projectCta} />
+  </div>
+</Section>
+
+<style>
+  .pod-liczbami { gap: 56px; }
+  .top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px 40px;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px clamp(32px, 4.1vw, 56px);
+  }
+  .stats li {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 22px;
+    border-top: 2px solid var(--accent);
+  }
+  .value {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(72px, 8.8vw, 120px);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    color: var(--white);
+  }
+  /* 64px at 120px */
+  .value :global(small) { font-size: 0.5334em; }
+  .stat-text { font-size: 20px; line-height: 1.45; }
+  .punch { display: flex; flex-direction: column; gap: 10px; }
+  .punch-line {
+    font-style: italic;
+    font-size: clamp(24px, 2.5vw, 34px);
+    line-height: 1.2;
+    color: var(--white);
+  }
+  .punch .text { line-height: 1.5; }
+  .project {
+    display: grid;
+    grid-template-columns: 3fr 6fr 3fr;
+    column-gap: clamp(32px, 4.1vw, 56px);
+    row-gap: 12px;
+    align-items: baseline;
+    padding-top: 26px;
+    border-top: 1px solid var(--rule);
+  }
+  .project-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.06em;
+    color: var(--white);
+  }
+  .project .text { line-height: 1.5; }
+  .cta { text-align: right; }
+  .cta:hover { color: var(--white); }
+  @media (max-width: 1024px) {
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    .project { grid-template-columns: 1fr; }
+    .cta { text-align: left; }
+  }
+  @media (max-width: 720px) {
+    .pod-liczbami { gap: 44px; }
+    .stats { grid-template-columns: 1fr; gap: 36px; }
+    .stat-text { font-size: 18px; }
+  }
+</style>

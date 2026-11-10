@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.env*
+.DS_Store
+
+# Design source export (15 MB, embedded fonts and photos) — kept locally, not in the repo
+Witryna BEL Zalewska – nowa wersja.html

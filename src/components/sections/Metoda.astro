@@ -1,0 +1,58 @@
+---
+import Section from '../Section.astro';
+import { metoda as s } from '../../content/site';
+---
+<Section id="metoda" tone="dark" tall class="metoda">
+  <div class="intro">
+    <p class="eyebrow" set:html={s.eyebrow} />
+    <h2 id="metoda-title" class="h2" set:html={s.title} />
+    <p class="text" set:html={s.text} />
+    <p class="text-sm muted note" set:html={s.note} />
+  </div>
+  <div>
+    <p class="eyebrow label" set:html={s.listLabel} />
+    <ol class="tools">
+      {s.tools.map((tool, i) => (
+        <li>
+          <span class="num">N°{String(i + 1).padStart(2, '0')}</span>
+          <div class="body">
+            <h3 class="title" set:html={tool.title} />
+            <p class="tool-text muted" set:html={tool.text} />
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Section>
+
+<style>
+  .metoda {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    column-gap: var(--gap-col);
+    row-gap: 56px;
+    align-items: center;
+    align-content: center;
+  }
+  .intro { display: flex; flex-direction: column; gap: 28px; }
+  .note { padding-top: 20px; border-top: 1px solid var(--rule); }
+  .note :global(.hl) { color: var(--dark-body); }
+  .label { padding-bottom: 22px; }
+  .tools li {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    align-items: baseline;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .tools li:last-child { border-bottom: 1px solid var(--rule); }
+  .body { display: flex; flex-direction: column; gap: 6px; }
+  .tool-text { font-size: 18px; line-height: 1.45; }
+  @media (max-width: 900px) {
+    .metoda { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .tools li { grid-template-columns: 52px 1fr; }
+    .tool-text { font-size: 17px; }
+  }
+</style>

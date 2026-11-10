@@ -1,0 +1,60 @@
+---
+import Section from '../Section.astro';
+import { kultura as s } from '../../content/site';
+---
+<Section id="kultura" tone="light" tall class="kultura">
+  <div class="head">
+    <p class="eyebrow" set:html={s.eyebrow} />
+    <h2 id="kultura-title" class="h2" set:html={s.title} />
+  </div>
+  <div class="cols">
+    <div class="intro">
+      <p class="lead" set:html={s.lead} />
+      <p class="text-sm" set:html={s.text} />
+    </div>
+    <ol class="pillars">
+      {s.pillars.map((pillar, i) => (
+        <li>
+          <span class="num">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="title" set:html={pillar.title} />
+          <p class="pillar-text" set:html={pillar.text} />
+        </li>
+      ))}
+    </ol>
+  </div>
+</Section>
+
+<style>
+  .kultura { gap: 52px; }
+  .head { display: flex; flex-direction: column; gap: 28px; }
+  .cols {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    column-gap: var(--gap-col);
+    row-gap: 44px;
+    align-items: start;
+  }
+  .intro { display: flex; flex-direction: column; gap: 20px; }
+  .intro .text-sm { line-height: 1.55; }
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 48px;
+    row-gap: 32px;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+  h3 { line-height: 1.2; }
+  .pillar-text { font-size: 17px; line-height: 1.5; }
+  @media (max-width: 900px) {
+    .cols { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .pillars { grid-template-columns: 1fr; gap: 28px; }
+  }
+</style>

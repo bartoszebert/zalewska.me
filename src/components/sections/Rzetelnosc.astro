@@ -1,0 +1,50 @@
+---
+import Section from '../Section.astro';
+import { rzetelnosc as s } from '../../content/site';
+---
+<Section id="jak-pracuje" tone="light" class="rzetelnosc">
+  <div class="top">
+    <div class="head">
+      <p class="eyebrow" set:html={s.eyebrow} />
+      <h2 id="jak-pracuje-title" class="h2" set:html={s.title} />
+    </div>
+    <p class="lead" set:html={s.lead} />
+  </div>
+  <ul class="rules">
+    {s.rules.map((rule) => (
+      <li>
+        <h3 class="title" set:html={rule.title} />
+        <p class="text-sm" set:html={rule.text} />
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<style>
+  .rzetelnosc { gap: 48px; }
+  .top {
+    display: grid;
+    grid-template-columns: 6fr 5fr;
+    column-gap: var(--gap-col);
+    row-gap: 28px;
+    align-items: end;
+  }
+  .head { display: flex; flex-direction: column; gap: 28px; }
+  .rules { border-bottom: 1px solid var(--rule); }
+  .rules li {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    column-gap: var(--gap-col);
+    row-gap: 8px;
+    align-items: baseline;
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+  }
+  h3 { line-height: 1.2; }
+  @media (max-width: 900px) {
+    .top { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .rules li { grid-template-columns: 1fr; }
+  }
+</style>

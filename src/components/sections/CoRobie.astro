@@ -1,0 +1,57 @@
+---
+import Section from '../Section.astro';
+import { coRobie as s } from '../../content/site';
+---
+<Section id="nad-czym-pracuje" tone="dark" tall class="co-robie">
+  <div class="top">
+    <div class="head">
+      <p class="eyebrow" set:html={s.eyebrow} />
+      <h2 id="nad-czym-pracuje-title" class="h2" set:html={s.title} />
+    </div>
+    <p class="lead" set:html={s.lead} />
+  </div>
+  <ol class="areas">
+    {s.areas.map((area) => (
+      <li>
+        <span class="num">{area.num}</span>
+        <h3 class="title" set:html={area.title} />
+        <p class="text-sm muted" set:html={area.text} />
+      </li>
+    ))}
+  </ol>
+</Section>
+
+<style>
+  .co-robie { gap: 80px; }
+  .top {
+    display: grid;
+    grid-template-columns: 6fr 5fr;
+    column-gap: var(--gap-col);
+    row-gap: 28px;
+    align-items: end;
+  }
+  .head { display: flex; flex-direction: column; gap: 28px; }
+  .areas {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px clamp(32px, 4.1vw, 56px);
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--rule);
+  }
+  @media (max-width: 1024px) {
+    .co-robie { gap: 56px; }
+    .areas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    .top { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .co-robie { gap: 44px; }
+    .areas { grid-template-columns: 1fr; }
+  }
+</style>

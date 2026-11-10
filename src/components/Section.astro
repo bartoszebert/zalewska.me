@@ -1,0 +1,15 @@
+---
+interface Props {
+  id: string;
+  tone: 'dark' | 'light';
+  /** artboard height on desktop: 768 (default) or 900 */
+  tall?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+// rest carries the caller's scope attribute so its scoped styles reach <section>
+const { id, tone, tall = false, class: className, ...rest } = Astro.props;
+---
+<section id={id} aria-labelledby={`${id}-title`} class:list={['section', tone, { tall }, className]} {...rest}>
+  <slot />
+</section>

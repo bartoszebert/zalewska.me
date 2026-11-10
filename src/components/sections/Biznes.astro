@@ -1,0 +1,74 @@
+---
+import Section from '../Section.astro';
+import { biznes as s } from '../../content/site';
+---
+<Section id="biznes" tone="dark" tall class="biznes">
+  <div class="head">
+    <p class="eyebrow" set:html={s.eyebrow} />
+    <h2 id="biznes-title" class="h2" set:html={s.title} />
+  </div>
+  <div class="cols">
+    <p class="lead" set:html={s.lead} />
+    <div class="copy">
+      <p set:html={s.text} />
+      <p class="white" set:html={s.textStrong} />
+    </div>
+  </div>
+  <div class="lessons">
+    <p class="eyebrow" set:html={s.listLabel} />
+    <ul>
+      {s.lessons.map((lesson) => (
+        <li>
+          <h3 class="title" set:html={lesson.title} />
+          <p class="lesson-text muted" set:html={lesson.text} />
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>
+
+<style>
+  .biznes { gap: 56px; }
+  .head { display: flex; flex-direction: column; gap: 28px; }
+  .cols {
+    display: grid;
+    grid-template-columns: 6fr 5fr;
+    column-gap: var(--gap-col);
+    row-gap: 24px;
+    align-items: start;
+  }
+  .copy {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+  .lessons { display: flex; flex-direction: column; gap: 20px; }
+  ul {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px 40px;
+  }
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+  h3 { font-size: 20px; }
+  .lesson-text { font-size: 17px; line-height: 1.45; }
+  @media (max-width: 1024px) {
+    ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 900px) {
+    .cols { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    .biznes { gap: 44px; }
+    ul { grid-template-columns: 1fr; gap: 28px; }
+    .copy { font-size: 17px; }
+    h3 { font-size: 19px; }
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+import Section from '../Section.astro';
+import { czlowiek as s } from '../../content/site';
+---
+<Section id="czlowiek" tone="light" class="czlowiek">
+  <div class="col">
+    <p class="eyebrow" set:html={s.eyebrow} />
+    <h2 id="czlowiek-title" class="h2" set:html={s.title} />
+  </div>
+  <div class="col right">
+    <p class="lead" set:html={s.lead} />
+    <p class="text ruled" set:html={s.text} />
+  </div>
+</Section>
+
+<style>
+  .czlowiek {
+    display: grid;
+    grid-template-columns: 6fr 5fr;
+    column-gap: var(--gap-col);
+    row-gap: 40px;
+    align-items: center;
+    align-content: center;
+  }
+  .col { display: flex; flex-direction: column; gap: 28px; }
+  .right { gap: 24px; }
+  .ruled { padding-top: 22px; border-top: 1px solid var(--rule); }
+  @media (max-width: 900px) {
+    .czlowiek { grid-template-columns: 1fr; }
+  }
+</style>

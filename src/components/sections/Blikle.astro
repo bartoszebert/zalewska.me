@@ -1,0 +1,64 @@
+---
+import Section from '../Section.astro';
+import { blikle as s } from '../../content/site';
+---
+<Section id="blikle" tone="dark" class="blikle">
+  <h2 id="blikle-title" class="eyebrow" set:html={s.eyebrow} />
+  <figure class="main">
+    <blockquote><p set:html={s.quote} /></blockquote>
+    <div class="rule" aria-hidden="true"></div>
+    <figcaption>
+      <span class="author">{s.author}</span>
+      <cite set:html={s.source} />
+    </figcaption>
+  </figure>
+  <figure class="second">
+    <blockquote set:html={s.quote2} />
+    <figcaption set:html={s.source2} />
+  </figure>
+</Section>
+
+<style>
+  .blikle {
+    align-items: center;
+    gap: 44px;
+    padding-inline: calc(var(--pad-x) + var(--gutter));
+    text-align: center;
+  }
+  .main { display: flex; flex-direction: column; align-items: center; gap: 44px; }
+  .main p {
+    font-style: italic;
+    font-size: clamp(28px, 3.25vw, 44px);
+    line-height: 1.22;
+    color: var(--white);
+  }
+  .rule { width: 48px; height: 1px; background: #4A4A4A; }
+  figcaption { display: flex; flex-direction: column; gap: 10px; }
+  .author {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  cite { font-size: 18px; color: var(--dark-label); }
+  .second {
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--dark-muted);
+  }
+  .second blockquote, .second figcaption { display: inline; }
+  .second figcaption {
+    margin-left: 0.25em;
+    font-style: normal;
+    font-size: 16px;
+    color: var(--dark-dim);
+  }
+  @media (max-width: 720px) {
+    .blikle, .main { gap: 32px; }
+    .blikle { padding-inline: var(--pad-x); }
+    .second { font-size: 19px; }
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+import Section from '../Section.astro';
+import { koalicja as s } from '../../content/site';
+---
+<Section id="koalicja" tone="light" tall class="koalicja">
+  <div class="intro">
+    <p class="eyebrow" set:html={s.eyebrow} />
+    <h2 id="koalicja-title" class="h2" set:html={s.title} />
+    <p class="lead" set:html={s.lead} />
+    <p class="text" set:html={s.text} />
+    <a href="#kontakt" class="eyebrow cta" set:html={s.cta} />
+  </div>
+  <div>
+    <p class="eyebrow label" set:html={s.listLabel} />
+    <ul class="partners">
+      {s.partners.map((partner) => (
+        <li>
+          <h3 class="title" set:html={partner.title} />
+          <p class="text-sm" set:html={partner.text} />
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>
+
+<style>
+  .koalicja {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    column-gap: var(--gap-col);
+    row-gap: 56px;
+    align-items: center;
+    align-content: center;
+  }
+  .intro { display: flex; flex-direction: column; gap: 28px; }
+  .cta {
+    align-self: flex-start;
+    margin-top: 4px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+  }
+  .label { padding-bottom: 22px; }
+  li {
+    display: grid;
+    grid-template-columns: 4fr 7fr;
+    column-gap: 40px;
+    row-gap: 8px;
+    align-items: baseline;
+    padding: 24px 0;
+    border-top: 1px solid var(--rule);
+  }
+  li:last-child { border-bottom: 1px solid var(--rule); }
+  h3 { font-size: 20px; }
+  @media (max-width: 900px) {
+    .koalicja { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 720px) {
+    li { grid-template-columns: 1fr; }
+    h3 { font-size: 19px; }
+  }
+</style>

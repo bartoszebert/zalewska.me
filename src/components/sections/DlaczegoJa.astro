@@ -1,0 +1,54 @@
+---
+import Section from '../Section.astro';
+import { dlaczegoJa as s } from '../../content/site';
+---
+<Section id="dlaczego-ja" tone="light" tall class="dlaczego-ja">
+  <div class="intro">
+    <p class="eyebrow" set:html={s.eyebrow} />
+    <h2 id="dlaczego-ja-title" class="h2" set:html={s.title} />
+    <p class="lead" set:html={s.lead} />
+    <p class="text" set:html={s.text} />
+  </div>
+  <div>
+    <p class="eyebrow label" set:html={s.listLabel} />
+    <ul class="benefits">
+      {s.benefits.map((benefit) => (
+        <li>
+          <h3 set:html={benefit.title} />
+          <p class="text-sm" set:html={benefit.text} />
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>
+
+<style>
+  .dlaczego-ja {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    column-gap: var(--gap-col);
+    row-gap: 56px;
+    align-items: center;
+    align-content: center;
+  }
+  .intro { display: flex; flex-direction: column; gap: 28px; }
+  .label { padding-bottom: 22px; }
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 24px 0;
+    border-top: 1px solid var(--rule);
+  }
+  li:last-child { border-bottom: 1px solid var(--rule); }
+  h3 {
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 2.2vw, 30px);
+    line-height: 1.2;
+    color: var(--heading);
+  }
+  @media (max-width: 900px) {
+    .dlaczego-ja { grid-template-columns: 1fr; }
+  }
+</style>

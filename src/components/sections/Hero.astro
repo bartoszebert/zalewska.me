@@ -1,0 +1,140 @@
+---
+import { Picture } from 'astro:assets';
+import heroImg from '../../assets/hero.jpg';
+import { hero, nav } from '../../content/site';
+---
+<section id="start" aria-labelledby="start-title" class="hero dark">
+  <Picture
+    src={heroImg}
+    alt={hero.alt}
+    formats={['avif', 'webp']}
+    widths={[640, 960, 1280, heroImg.width]}
+    sizes="(max-width: 900px) 100vw, 62vw"
+    loading="eager"
+    fetchpriority="high"
+    class="photo"
+  />
+  <div class="shade-x" aria-hidden="true"></div>
+  <div class="shade-top" aria-hidden="true"></div>
+
+  <nav class="nav eyebrow" aria-label="Nawigacja główna">
+    <a href="#start" class="logo">{hero.title}</a>
+    <span class="links">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </span>
+  </nav>
+
+  <div class="content">
+    <h1 id="start-title">{hero.title}</h1>
+    <p class="lead-hero" set:html={hero.lead} />
+    <p class="note" set:html={hero.note} />
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: clamp(768px, 100svh, 900px);
+    overflow: hidden;
+  }
+  .photo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 62%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+  .shade-x {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #0E0E0E 36%, rgba(14, 14, 14, 0.55) 50%, rgba(14, 14, 14, 0) 66%);
+  }
+  .shade-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(180deg, rgba(14, 14, 14, 0.92) 0%, rgba(14, 14, 14, 0) 100%);
+  }
+  .nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 20px;
+    padding: 40px var(--pad-x);
+  }
+  .nav a:hover { color: var(--white); }
+  .logo { font-weight: 700; color: var(--white); }
+  .links { display: flex; gap: 40px; }
+  .content {
+    position: absolute;
+    left: var(--pad-x);
+    top: 0;
+    bottom: 0;
+    width: min(660px, 100% - 2 * var(--gutter));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 36px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(64px, 8.8vw, 120px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+  .lead-hero {
+    font-style: italic;
+    font-size: clamp(28px, 3.1vw, 42px);
+    line-height: 1.12;
+    color: var(--white);
+  }
+  .note {
+    max-width: 470px;
+    padding-top: 20px;
+    border-top: 1px solid var(--dark-rule);
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--dark-muted);
+  }
+  .note :global(.hl) { color: var(--dark-body); }
+
+  /* phone/tablet portrait: photo on top fading into ink, text below */
+  @media (max-width: 900px) {
+    .hero { height: auto; }
+    .photo {
+      position: relative;
+      width: 100%;
+      height: 60svh;
+      object-position: 50% 28%;
+    }
+    .shade-x {
+      bottom: auto;
+      height: 60svh;
+      background: linear-gradient(180deg, rgba(14, 14, 14, 0) 55%, #0E0E0E 100%);
+    }
+    .content {
+      position: relative;
+      left: auto;
+      width: auto;
+      padding: 0 var(--pad-x) 72px;
+      gap: 28px;
+    }
+  }
+  @media (max-width: 720px) {
+    .nav { padding-top: 24px; padding-bottom: 24px; }
+    .links { gap: 20px; }
+    .note { font-size: 17px; }
+  }
+</style>
